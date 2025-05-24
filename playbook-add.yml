@@ -1,0 +1,19 @@
+---
+- name: Add file in user home directory
+  hosts: all
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: Installing vim on machine
+    ansible.builtin.apt:
+      name: vim
+      state: present
+
+  - name: Create a simple text file
+    copy:
+      dest: "/opt/hello.txt"
+      content: |
+        Hello from Ansible!
+        This file was created using the Ansible copy module.
+        Current date: {{ ansible_date_time.date }}

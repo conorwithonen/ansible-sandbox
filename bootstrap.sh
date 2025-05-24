@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+# clear up existing inventory files
+echo "Cleaning up old inventory files"
+rm -f inventory/*.yml
+
+# spin up fake hosts
+docker compose up -d
+
+# Get ips and generates inventory files from docker config
+./get_inventory.py
+
+echo "Ansible test provisioned..."
+echo "Run ansible-playbook -i inventory/ playbook-add.yml to get started"

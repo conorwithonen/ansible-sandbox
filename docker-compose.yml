@@ -1,0 +1,17 @@
+name: ansible
+services:
+  manager:
+    build:
+      dockerfile: ./Dockerfile
+    tty: true
+    deploy:
+      mode: replicated
+      replicas: 4
+
+  worker:
+    build:
+      dockerfile: ./Dockerfile
+    tty: true
+    deploy:
+      mode: replicated
+      replicas: 8
