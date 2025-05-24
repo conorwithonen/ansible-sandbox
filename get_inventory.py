@@ -1,4 +1,3 @@
-#!/home/conor/projects/venv/bin/python
 import subprocess
 import json
 
