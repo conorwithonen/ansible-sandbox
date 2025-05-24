@@ -1,4 +1,8 @@
 #!/usr/bin/bash
+if [ ! -d ./venv ]; then
+  python3 -m venv venv && source venv/bin/activate
+  pip install -r requirements.txt
+fi
 
 # clear up existing inventory files
 echo "Cleaning up old inventory files"
