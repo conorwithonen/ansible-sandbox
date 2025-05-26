@@ -1,19 +1,17 @@
 ---
-- name: Installing VIM and adding a text file
+- name: Base configurations
   hosts: all
   remote_user: ansible
   become: yes
 
   tasks:
-  - name: Installing vim on machine
+  - name: Base packages through apt
     ansible.builtin.apt:
-      name: vim
+      name:
+        - vim
+        - inetutils-ping
+        - vim
+        - rsync
+        - wget
+        - curl
       state: present
-
-  - name: Create a simple text file
-    copy:
-      dest: "/opt/hello.txt"
-      content: |
-        Hello from Ansible!
-        This file was created using the Ansible copy module.
-        Current date: {{ ansible_date_time.date }}
