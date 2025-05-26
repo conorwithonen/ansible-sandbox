@@ -1,0 +1,6 @@
+---
+- name: Install main user
+  import_playbook: playbook-user.yml 
+
+- name: Install system packages
+  import_playbook: playbook-add.yml 

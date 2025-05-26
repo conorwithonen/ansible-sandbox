@@ -1,0 +1,37 @@
+---
+- name: Devops user add and SSH lockdown
+  hosts: all
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: Adding devops user for login
+    user: 
+      name: devops
+      groups:
+        - sudo
+      state: present
+      shell: /bin/bash
+
+  - name: Adding authorized key for devops user.
+    authorized_key:
+      user: devops
+      key: "{{ lookup('file', '../ssh/ansibletest.pub')}}"
+
+  - name: Allow passwordless sudo for the user (Debian/Ubuntu)
+    lineinfile:
+      path: /etc/sudoers
+      state: present
+      regexp: '^devops'
+      line: 'devops ALL=(ALL) NOPASSWD:ALL'
+      validate: '/usr/sbin/visudo -cf %s'
+
+  - name: Configure and restart sshd
+    lineinfile:
+      path: "/etc/ssh/sshd_config"
+      regex: "^(#)?{{item.key}}"
+      line: "{{item.key}} {{item.value}}"
+      state: present
+    loop:
+      - { key: "PermitRootLogin", value: "no" }
+      - { key: "PasswordAuthentication", value: "no" } 

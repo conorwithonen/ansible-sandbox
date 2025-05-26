@@ -1,5 +1,5 @@
 ---
-- name: Add file in user home directory
+- name: Installing VIM and adding a text file
   hosts: all
   remote_user: ansible
   become: yes

@@ -25,4 +25,4 @@ docker compose up -d
 $(which python) ./get_inventory.py
 
 echo "Ansible test provisioned..."
-echo "Run ansible-playbook -i inventory/ playbook-add.yml to get started"
+ansible-playbook -i inventory/ playbooks/base.yml
